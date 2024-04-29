@@ -1,1 +1,58 @@
-<p>credit works!</p>
+<br/>
+<br/>
+<br/>
+<br/>
+<form *ngIf="entityForm" [formGroup]="entityForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="deadline">Deadline:</label>
+      <input type="date" id="deadline" formControlName="deadline">
+      <div *ngIf="entityForm.get('deadline')?.invalid && entityForm.get('deadline')?.touched">
+        <div *ngIf="entityForm.get('deadline')?.errors?.['required']">Deadline is required.</div>
+      </div>
+    </div>
+  
+    <div>
+      <label for="interestRate">Interest Rate:</label>
+      <input type="number" id="interestRate" formControlName="interestRate" min="0" max="100">
+      <div *ngIf="entityForm.get('interestRate')?.invalid && entityForm.get('interestRate')?.touched">
+        <div *ngIf="entityForm.get('interestRate')?.errors?.['required']">Interest rate is required.</div>
+        <div *ngIf="entityForm.get('interestRate')?.errors?.['min']">Interest rate must be greater than or equal to 0.</div>
+        <div *ngIf="entityForm.get('interestRate')?.errors?.['max']">Interest rate must be less than or equal to 100.</div>
+      </div>
+    </div>
+  
+    <div>
+      <label for="startDate">Start Date:</label>
+      <input type="date" id="startDate" formControlName="startDate">
+      <div *ngIf="entityForm.get('startDate')?.invalid && entityForm.get('startDate')?.touched">
+        <div *ngIf="entityForm.get('startDate')?.errors?.['required']">Start date is required.</div>
+      </div>
+    </div>
+  
+    <div>
+      <label for="autoFinance">Auto Finance:</label>
+      <input type="number" id="autoFinance" formControlName="autoFinance">
+      <div *ngIf="entityForm.get('autoFinance')?.invalid && entityForm.get('autoFinance')?.touched">
+        <div *ngIf="entityForm.get('autoFinance')?.errors?.['required']">Auto finance amount is required.</div>
+      </div>
+    </div>
+  
+    <div>
+      <label for="totalAmount">Total Amount:</label>
+      <input type="number" id="totalAmount" formControlName="totalAmount">
+      <div *ngIf="entityForm.get('totalAmount')?.invalid && entityForm.get('totalAmount')?.touched">
+        <div *ngIf="entityForm.get('totalAmount')?.errors?.['required']">Total amount is required.</div>
+      </div>
+    </div>
+    <div>
+        <label for="creditRequest">Credit Request:</label>
+        <select id="creditRequest" formControlName="creditRequest">
+          <option *ngFor="let request of creditRequests" [value]="request.id">{{ request.id }}</option>
+        </select>
+        <div *ngIf="entityForm.get('creditRequest')?.invalid && entityForm.get('creditRequest')?.touched">
+          <div *ngIf="entityForm.get('creditRequest')?.errors?.['required']">Credit request is required.</div>
+        </div>
+      </div>
+    <button type="submit" [disabled]="!entityForm.valid">Submit</button>
+  </form>
+  

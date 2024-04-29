@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
+import { CreditRequestService } from '../credit-request.service';
 
 @Component({
   selector: 'app-credit-request',
@@ -9,7 +10,7 @@ import { FormBuilder, FormGroup, Validators, AbstractControl, ValidationErrors }
 export class CreditRequestComponent implements OnInit {
   entityForm: FormGroup | undefined;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder,private crs: CreditRequestService) { }
 
   ngOnInit(): void {
     this.entityForm = this.fb.group({
@@ -26,7 +27,9 @@ export class CreditRequestComponent implements OnInit {
 
   onSubmit() {
     if (this.entityForm?.valid) {
-      // Handle form submission
+      this.crs.addCreditRequest(this.entityForm.value).subscribe(data=>{
+        console.log(data);
+      });  
     } else {
       // Form validation failed, do something
     }

@@ -25,6 +25,7 @@ import { InfoComponent } from './info/info.component';
 import { ServiceComponent } from './service/service.component';
 import { WhyComponent } from './why/why.component';
 import { TeamComponent } from './team/team.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { TeamComponent } from './team/team.component';
     RouterModule,
     AppRoutingModule,
     HomeModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

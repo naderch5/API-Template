@@ -29,7 +29,7 @@ const routes: Routes =[
     {path:'team',component:TeamComponent},
     {path:'why',component:WhyComponent},
     {path:'credit',component:CreditComponent},
-    {path:'creditR',component:CreditRequestComponent},
+    {path:'creditRequest',component:CreditRequestComponent},
     {path:'recovery',component:RecoveryComponent},
     { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];

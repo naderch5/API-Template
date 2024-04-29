@@ -1,1 +1,36 @@
-<p>recovery works!</p>
+<form *ngIf="entityForm" [formGroup]="entityForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="amountRecovered">Amount Recovered:</label>
+      <input type="number" id="amountRecovered" formControlName="amountRecovered">
+      <div *ngIf="entityForm.get('amountRecovered')?.invalid && entityForm.get('amountRecovered')?.touched">
+        <div *ngIf="entityForm.get('amountRecovered')?.errors?.['required']">Amount recovered is required.</div>
+      </div>
+    </div>
+  
+    <div>
+      <label for="date">Date:</label>
+      <input type="date" id="date" formControlName="date">
+      <div *ngIf="entityForm.get('date')?.invalid && entityForm.get('date')?.touched">
+        <div *ngIf="entityForm.get('date')?.errors?.['required']">Date is required.</div>
+      </div>
+    </div>
+  
+    <div>
+      <label for="state">State:</label>
+      <input type="text" id="state" formControlName="state">
+      <div *ngIf="entityForm.get('state')?.invalid && entityForm.get('state')?.touched">
+        <div *ngIf="entityForm.get('state')?.errors?.['required']">State is required.</div>
+      </div>
+    </div>
+  
+    <div>
+      <label for="creditId">Credit ID:</label>
+      <input type="number" id="creditId" formControlName="creditId">
+      <div *ngIf="entityForm.get('creditId')?.invalid && entityForm.get('creditId')?.touched">
+        <div *ngIf="entityForm.get('creditId')?.errors?.['required']">Credit ID is required.</div>
+      </div>
+    </div>
+  
+    <button type="submit" [disabled]="!entityForm.valid">Submit</button>
+  </form>
+  
