@@ -1,16 +1,18 @@
-import { CreditService } from './../credit.service';
-import { CreditRequestService } from './../credit-request.service';
-import { CreditRequest } from './../credit-request.model';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { ModalDismissReasons, NgbCalendar, NgbDate, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CreditRequest } from '../credit-request.model';
+import { CreditService } from '../credit.service';
+import { CreditRequestService } from '../credit-request.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-credit',
-  templateUrl: './credit.component.html',
-  styleUrls: ['./credit.component.css']
+  selector: 'app-credit-edit',
+  templateUrl: './credit-edit.component.html',
+  styleUrls: ['./credit-edit.component.css']
 })
-export class CreditComponent implements OnInit {
+export class CreditEditComponent implements OnInit {
+
   entityForm: FormGroup | undefined;
   creditRequests: CreditRequest[] = [];
   fromDate: NgbDate;
@@ -20,16 +22,18 @@ export class CreditComponent implements OnInit {
   model1 : NgbDate;
   model2 : NgbDate;
   model : NgbDate;
+  currentId: number;
 
   focus;
   focus1;
   focus2;
   focus3;
   focus4;
-  constructor(private fb: FormBuilder, private cs :CreditService , private crs :CreditRequestService,private modalService: NgbModal, calendar: NgbCalendar) {
+  constructor(private route: ActivatedRoute,private fb: FormBuilder, private cs :CreditService , private crs :CreditRequestService,private modalService: NgbModal, calendar: NgbCalendar) {
     this.fromDate = calendar.getToday();
     this.toDate = calendar.getNext(calendar.getToday(), 'd', 10);
   }
+
   open(content, type, modalDimension) {
     if (modalDimension === 'sm' && type === 'modal_mini') {
         this.modalService.open(content, { windowClass: 'modal-mini', size: 'sm', centered: true }).result.then((result) => {
@@ -84,18 +88,27 @@ startDateChanged(date){
   }
 }
   ngOnInit(): void {
-    this.entityForm = this.fb.group({
-      deadline: ['', Validators.required],
-      startDate: ['', Validators.required],
-      autoFinance: ['', Validators.required],
-      creditRequest: [null, Validators.required] // Add a control for credit request
-
+    this.route.params.subscribe(params => {
+      this.currentId = params['id']; // Access the 'id' parameter from the URL
+      console.log('Test ID:', this.currentId);
     });
-
     this.crs.getAllCreditRequests().subscribe(creditRequests => {
       this.creditRequests = creditRequests;
  
     });
+    this.cs.getCredit(this.currentId).subscribe((credit)=>{
+      this.entityForm = this.fb.group({
+        deadline: [this.fromDateO(credit.deadline), Validators.required],
+        startDate: [this.fromDateO(credit.startDate), Validators.required],
+        autoFinance: [credit.autoFinance, Validators.required],
+        creditRequest: [credit.CreditRequest, Validators.required] 
+  
+      });
+    })
+    console.log(this.entityForm.value);
+
+
+
   }
   toDateF( dateObject) {
     const { year, month, day } = dateObject;
@@ -110,15 +123,34 @@ startDateChanged(date){
         ...this.entityForm.value,
         creditRequest: this.creditRequests.find(request=>request.id==this.entityForm.value.creditRequest),
         startDate: this.toDateF(this.entityForm.value.startDate),
-        deadline: this.toDateF(this.entityForm.value.deadline)};
+        deadline: this.toDateF(this.entityForm.value.deadline),
+        idCredit: this.currentId};
         
-      this.cs.addCredit(requestData).subscribe(data=>{
+      this.cs.updateCredit(requestData).subscribe(data=>{
         console.log(data);
       });  
-    } else {
-      // Form validation failed, do something
-    }
+    } else {    }
+  }
+   fromDateO(t) {
+    // Create a new Date object using the provided string
+    const date = new Date(t);
+  
+    // Extract year, month, and day from the Date object
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1; // Adding 1 to match the 1-based month index
+    const day = date.getDate();
+  
+    // Return an object containing the extracted properties
+    return { year, month, day };
   }
 
+  // Custom validator for interestRate
+  interestRateValidator(control: AbstractControl): ValidationErrors | null {
+    const value = control.value;
+    if (value < 0 || value > 100) {
+      return { invalidInterestRate: true };
+    }
+    return null;
+  }
 
 }

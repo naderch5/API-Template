@@ -1,0 +1,54 @@
+<section class="section section-lg bg-gradient-default">
+    <div class="shape shape-style-1 shape-primary">
+        <span class="span-150"></span>
+        <span class="span-50"></span>
+        <span class="span-50"></span>
+        <span class="span-75"></span>
+        <span class="span-100"></span>
+        <span class="span-75"></span>
+        <span class="span-50"></span>
+        <span class="span-100"></span>
+        <span class="span-50"></span>
+        <span class="span-100"></span>
+      </div>
+      <div class="container pt-lg-md">
+
+<table class="table table-striped table-dark">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Start date</th>
+        <th scope="col">Deadline</th>
+        <th scope="col">Auto finance</th>
+        <th scope="col">Interest rate</th>
+        <th scope="col">Total amount</th>
+        <th scope="col">Credit request</th>
+        <th scope="col">Account</th>
+        <th scope="col">Actions <a routerLink="/credit" title="Add" class="btn btn-icon btn-1 btn-success"><span class="btn-inner--icon"><i class="ni ni-fat-add"></i></span></a></th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let credit of pagedCredits; let i = index">
+            <th scope="row">{{credit.idCredit}}</th>
+            <td>{{ credit.startDate | date:'mediumDate' }}</td>
+            <td>{{ credit.deadline | date:'mediumDate' }}</td>
+            <td>{{ credit.autoFinance }}</td>
+            <td>{{ credit.interestRate }}</td>
+            <td>{{ credit.totalAmount }}</td>
+            <td>{{ credit.creditRequest.id }}</td>
+            <td>{{ credit.account?.id }}</td>
+            <td class="d-flex">
+              <button title="Delete" (click)="deleteCredit(credit.idCredit)" class="btn btn-icon btn-2 btn-danger"><span class="btn-inner--icon"><i class="ni ni-basket"></i></span></button> 
+              <a [routerLink]="['/credit',credit.idCredit]" title="Update" class="btn btn-icon btn-2 btn-success"><span class="btn-inner--icon"><i class="ni ni-settings"></i></span></a>
+            </td>
+          </tr>
+    </tbody>
+</table>
+<nav aria-label="Page navigation example">
+    <ngb-pagination [collectionSize]="totalItems" [(page)]="currentPage" aria-label="Default pagination">
+      <ng-template ngbPaginationPrevious><i class="fa fa-angle-left"></i></ng-template>
+      <ng-template ngbPaginationNext><i class="fa fa-angle-right"></i></ng-template>
+    </ngb-pagination>
+  </nav>
+      </div>
+</section>

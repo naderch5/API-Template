@@ -16,6 +16,8 @@ import { CreditComponent } from './credit/credit.component';
 import { CreditRequestComponent } from './credit-request/credit-request.component';
 import { RecoveryComponent } from './recovery/recovery.component';
 import { HomeeComponent } from './homee/homee.component';
+import { CreditShowComponent } from './credit-show/credit-show.component';
+import { CreditEditComponent } from './credit-edit/credit-edit.component';
 
 const routes: Routes =[
     { path: 'home',             component: HomeComponent },
@@ -31,6 +33,8 @@ const routes: Routes =[
     {path:'credit',component:CreditComponent},
     {path:'creditRequest',component:CreditRequestComponent},
     {path:'recovery',component:RecoveryComponent},
+    {path:'credits', component: CreditShowComponent},
+    {path: 'credit/:id', component: CreditEditComponent},
     { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 

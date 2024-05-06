@@ -26,6 +26,8 @@ import { ServiceComponent } from './service/service.component';
 import { WhyComponent } from './why/why.component';
 import { TeamComponent } from './team/team.component';
 import { HttpClientModule } from '@angular/common/http';
+import { CreditShowComponent } from './credit-show/credit-show.component';
+import { CreditEditComponent } from './credit-edit/credit-edit.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +47,9 @@ import { HttpClientModule } from '@angular/common/http';
     InfoComponent,
     ServiceComponent,
     WhyComponent,
-    TeamComponent
+    TeamComponent,
+    CreditShowComponent,
+    CreditEditComponent
   ],
   imports: [
     BrowserModule,
