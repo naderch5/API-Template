@@ -1,0 +1,137 @@
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 3fr; /* 1/4 and 3/4 */
+    height: 100vh; /* Set the height of the container */
+}
+
+.scrollable {
+    overflow-y: auto; /* Enable vertical scrolling */
+    height: 100%; /* Fill the available height */
+}
+
+.messages {
+    padding: 0;
+    margin: 0;
+    list-style-type: none; /* Remove bullets from list */
+}
+
+.message {
+    border-bottom: 1px solid #ccc; /* Add border between messages */
+    padding: 10px;
+}
+/* Add this CSS to style the chat messages */
+.chatMessage {
+    margin-bottom: 10px;
+}
+
+.message-box {
+    max-width: 70%;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.message-content {
+    word-wrap: break-word;
+}
+
+.message-sender {
+    font-size: 0.8rem;
+    margin-top: 5px;
+}
+
+/* Style for messages from the current user */
+.current-user {
+    align-self: flex-end;
+    background-color: #DCF8C6; /* Example color for current user messages */
+}
+
+/* Style for messages from other users */
+.other-user {
+    align-self: flex-start;
+    background-color: #F0F0F0; /* Example color for other user messages */
+}
+
+.grid-box {
+    border: 1px solid #ccc; /* Border around the grid */
+    border-radius: 10px; /* Rounded corners for the box */
+    padding: 10px; /* Padding inside the box */
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 3fr; /* 1/4 and 3/4 */
+    height: 70vh; /* Set the height of the container */
+}
+
+.scrollable {
+    overflow-y: auto; /* Enable vertical scrolling */
+    height: 100%; /* Fill the available height */
+}
+
+.messages {
+    padding: 0;
+    margin: 0;
+    list-style-type: none; /* Remove bullets from list */
+}
+
+.message {
+    border-bottom: 1px solid #ccc; /* Add border between messages */
+    padding: 10px;
+    cursor: pointer; /* Change cursor to pointer on hover */
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+
+.message:hover {
+    background-color: #f0f0f0; /* Background color on hover */
+}
+
+.message.clicked {
+    background-color: #e0e0e0; /* Background color when clicked */
+}
+
+/* Add this CSS to style the input field and button */
+.message-input {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+.messageet{
+    min-height: 87%;
+}
+.message-input input[type="text"] {
+    flex: 1; /* Take remaining space */
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.message-input button {
+    margin-left: 10px;
+    padding: 8px 15px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff; /* Example color for button */
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+
+.message-input button:hover {
+    background-color: #0056b3; /* Darker color on hover */
+}
+
+/* Add this CSS to style the input field and button */
+.message-input input[type="text"]:disabled {
+    opacity: 0.7; /* Reduce opacity when disabled */
+    cursor: not-allowed; /* Change cursor to not-allowed when disabled */
+}
+
+.message-input button:disabled {
+    opacity: 0.7; /* Reduce opacity when disabled */
+    cursor: not-allowed; /* Change cursor to not-allowed when disabled */
+    background-color: #ccc; /* Change background color to indicate disabled state */
+    color: #666; /* Change text color to indicate disabled state */
+}

@@ -25,6 +25,11 @@ import { InfoComponent } from './info/info.component';
 import { ServiceComponent } from './service/service.component';
 import { WhyComponent } from './why/why.component';
 import { TeamComponent } from './team/team.component';
+import { HttpClientModule } from '@angular/common/http';
+import { UsersComponent } from './users/users.component';
+import { MessagesComponent } from './messages/messages.component';
+import { ChatComponent } from './chat/chat.component';
+import { UpdateUserComponent } from './update-user/update-user.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +49,11 @@ import { TeamComponent } from './team/team.component';
     InfoComponent,
     ServiceComponent,
     WhyComponent,
-    TeamComponent
+    TeamComponent,
+    UsersComponent,
+    MessagesComponent,
+    ChatComponent,
+    UpdateUserComponent
   ],
   imports: [
     BrowserModule,
@@ -53,7 +62,8 @@ import { TeamComponent } from './team/team.component';
     RouterModule,
     AppRoutingModule,
     HomeModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

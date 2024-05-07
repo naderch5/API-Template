@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
 import { CommonModule, } from '@angular/common';
 import { BrowserModule  } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
@@ -16,6 +16,9 @@ import { CreditComponent } from './credit/credit.component';
 import { CreditRequestComponent } from './credit-request/credit-request.component';
 import { RecoveryComponent } from './recovery/recovery.component';
 import { HomeeComponent } from './homee/homee.component';
+import { UsersComponent } from './users/users.component';
+import { UpdateUserComponent } from './update-user/update-user.component';
+import { ChatComponent } from './chat/chat.component';
 
 const routes: Routes =[
     { path: 'home',             component: HomeComponent },
@@ -31,6 +34,9 @@ const routes: Routes =[
     {path:'credit',component:CreditComponent},
     {path:'creditR',component:CreditRequestComponent},
     {path:'recovery',component:RecoveryComponent},
+    {path: 'users', component: UsersComponent},
+    {path: 'user/:id', component: UpdateUserComponent},
+    {path: 'chat', component: ChatComponent},
     { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 

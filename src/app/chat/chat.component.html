@@ -1,0 +1,54 @@
+<section class="section section-lg bg-gradient-default">
+    <div class="shape shape-style-1 shape-primary">
+        <span class="span-150"></span>
+        <span class="span-50"></span>
+        <span class="span-50"></span>
+        <span class="span-75"></span>
+        <span class="span-100"></span>
+        <span class="span-75"></span>
+        <span class="span-50"></span>
+        <span class="span-100"></span>
+        <span class="span-50"></span>
+        <span class="span-100"></span>
+      </div>
+      <div class="container pt-lg-md">
+<div class="grid-box">
+    <div class="grid-container">
+        <!-- Left Part (1/4 of the grid) -->
+        <div class="scrollable">
+            <ul class="messages">
+                <!-- Example messages -->
+                <li class="message" *ngFor="let m of recentMessages" (click)="m.sender.userId==currentUser?setCurrentChat(m.recipient.userId):setCurrentChat(m.sender.userId)" (mouseenter)="hoverMessage(true)" (mouseleave)="hoverMessage(false)">
+                    <strong>{{m.sender.userId==currentUser? m.recipient.username:m.sender.username}}:</strong> {{m.content}} <small>{{m.createdAt | date}}</small>
+                </li>
+            </ul>
+            <hr/>
+            <p>New Connections</p>
+            <ul class="messages">
+                <!-- Example messages -->
+                <li class="message" *ngFor="let nc of newConnections" (click)="setCurrentChat(nc.userId)" (mouseenter)="hoverMessage(true)" (mouseleave)="hoverMessage(false)">
+                    <strong>{{nc.username}}</strong> 
+                </li>
+            </ul>
+        </div>
+
+        <!-- Right Part (3/4 of the grid) -->
+        <div class="scrollable">
+            <div class="messageet">
+            <div class="chatMessage" *ngFor="let cm of currentChat" [ngClass]="{'current-user': cm.sender.userId === currentUser, 'other-user': cm.sender.userId !== currentUser}">
+                <div class="message-box">
+                    <div class="message-sender">{{ cm.sender.username }}</div>
+
+                    <div class="message-content">{{ cm.content }}</div>
+                </div>
+            </div>
+        </div>
+            <div class="message-input">
+                <input type="text" [(ngModel)]="newMessageContent" placeholder="Type your message here..." [disabled]="currentChat == null">
+                <button (click)="sendMessage()" [disabled]="!currentChat || !newMessageContent">Send</button>
+            </div>
+        </div>
+     
+    </div>
+</div>
+</div>
