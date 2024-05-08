@@ -3,7 +3,8 @@ import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators }
 import { ProjectService } from '../project.service';
 import { ProjectRequest } from '../project-request.model';
 import { ProjectRequestService } from '../project-request.service';
-
+import { saveAs } from 'file-saver';
+import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-project',
   templateUrl: './project.component.html',
@@ -13,10 +14,14 @@ export class ProjectComponent implements OnInit {
   entityForm: FormGroup | undefined;
   projectRequests:ProjectRequest[] = []; 
   requestId: number | undefined;
-  constructor(private fb: FormBuilder,private ps :ProjectService,private prs :ProjectRequestService) { }
+  reader = new FileReader();
+  chartUrl: string;
+
+  constructor(private fb: FormBuilder,private ps :ProjectService,private prs :ProjectRequestService,private http: HttpClient) { }
 
   ngOnInit(): void {
 
+    this.ps.getProjectTypeStatisticsChart();
     this.entityForm = this.fb.group({
       idProject: [this.requestId],
       name: ['', [Validators.required, this.NameValidator]],
@@ -31,9 +36,32 @@ export class ProjectComponent implements OnInit {
       this.projectRequests = projectRequests;
       console.log(projectRequests)
   });
-    
+  this.ps.getProjectTypeStatisticsChart().subscribe(
+    (blob: Blob) => {
+      this.createImageFromBlob(blob);
+    },
+    error => {
+      console.error('Error fetching chart:', error);
+    }
+  );
   }
  
+  getProjectTypeStatisticsChart() {
+    this.http.get('http://localhost:8082/project/project/project-type-statistics-chart', { responseType: 'blob' })
+      .subscribe((blob: Blob) => {
+        saveAs(blob, 'project-type-statistics-chart.png');
+      });
+  }
+  createImageFromBlob(blob: Blob) {
+    const reader = new FileReader();
+    reader.addEventListener('load', () => {
+      this.chartUrl = reader.result as string;
+    }, false);
+
+    if (blob) {
+      reader.readAsDataURL(blob);
+    }
+  }
 
   onSubmit() {
     if (this.entityForm?.valid && this.requestId) {

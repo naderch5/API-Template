@@ -40,8 +40,8 @@ export class ProjectService {
 
 
 
-  getProjectTypeStatisticsChart(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/project-type-statistics-chart`, { responseType: 'blob' });
+  getProjectTypeStatisticsChart(): Observable<Blob> {
+    return this.http.get(`http://localhost:8082/project/project/project-type-statistics-chart`, { responseType: 'blob' });
   }
 
   searchProjectByAttribute(attributeName: string, attributeValue: string): Observable<Project> {
