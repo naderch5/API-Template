@@ -1,109 +1,109 @@
 <section class="section section-lg section-hero section-shaped">
-    <div class="shape shape-style-1 shape-primary">
-        <span class="span-150"></span>
-        <span class="span-50"></span>
-        <span class="span-50"></span>
-        <span class="span-75"></span>
-        <span class="span-100"></span>
-        <span class="span-75"></span>
-        <span class="span-50"></span>
-        <span class="span-100"></span>
-        <span class="span-50"></span>
-        <span class="span-100"></span>
-      </div>
-    <div class="container pt-lg-md">
-      <div class="row justify-content-center">
-        <div class="col-lg-5">
-          <div class="card bg-secondary shadow border-0">
-            <div class="card-header bg-white">
-              <div class="text-muted text-center mb-3">
-                <p>Modifier un credit</p>
+  <div class="shape shape-style-1 shape-primary">
+      <span class="span-150"></span>
+      <span class="span-50"></span>
+      <span class="span-50"></span>
+      <span class="span-75"></span>
+      <span class="span-100"></span>
+      <span class="span-75"></span>
+      <span class="span-50"></span>
+      <span class="span-100"></span>
+      <span class="span-50"></span>
+      <span class="span-100"></span>
+    </div>
+  <div class="container pt-lg-md">
+    <div class="row justify-content-center">
+      <div class="col-lg-5">
+        <div class="card bg-secondary shadow border-0">
+          <div class="card-header bg-white">
+            <div class="text-muted text-center mb-3">
+              <p>Modifier un credit</p>
+            </div>
+          </div>
+          <div class="card-body px-lg-5 py-lg-5">
+         
+            <form *ngIf="entityForm" [formGroup]="entityForm" (ngSubmit)="onSubmit()">
+              <div class="form-group" [ngClass]="{'focused':focus3===true}">
+                <label for="startDate">Start date: </label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
+                  </div>
+                  <input class="form-control datepicker" placeholder="Select date" name="dp1" [(ngModel)]="model1"  id="startDate" formControlName="startDate"  ngbDatepicker #d1="ngbDatepicker" (click)="d1.toggle()" type="text" [dayTemplate]="t" (dateSelect)="startDateChanged($event)" autocomplete="off" (focus)="focus3=true" (blur)="focus3=false"/>
+                  <ng-template #t let-date let-focused="focused" >
+                   <span class="custom-day"
+                    [class.text-white]="isActive(date)"
+                    [class.range-end]="isRangeEnd(date)"
+                    [class.range-start]="isRangeStart(date)"
+                    [class.btn-light]="isActive(date)"
+                    [class.bg-primary]="isActive(date)"
+                    [class.range]="isInRange(date)"
+                    [class.faded]="isInRange(date)"
+                   >
+                     {{ date.day }}
+                   </span>
+                 </ng-template>
+                </div>
+                <div *ngIf="entityForm.get('startDate')?.invalid && entityForm.get('startDate')?.touched">
+                  <div *ngIf="entityForm.get('startDate')?.errors?.['required']">Start date is required.</div>
+                </div>
               </div>
-            </div>
-            <div class="card-body px-lg-5 py-lg-5">
-           
-              <form *ngIf="entityForm" [formGroup]="entityForm" (ngSubmit)="onSubmit()">
-                <div class="form-group" [ngClass]="{'focused':focus3===true}">
-                  <label for="startDate">Start date: </label>
-                  <div class="input-group">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
-                    </div>
-                    <input class="form-control datepicker" placeholder="Select date" name="dp1" [(ngModel)]="model1"  id="startDate" formControlName="startDate"  ngbDatepicker #d1="ngbDatepicker" (click)="d1.toggle()" type="text" [dayTemplate]="t" (dateSelect)="startDateChanged($event)" autocomplete="off" (focus)="focus3=true" (blur)="focus3=false"/>
-                    <ng-template #t let-date let-focused="focused" >
-                     <span class="custom-day"
-                      [class.text-white]="isActive(date)"
-                      [class.range-end]="isRangeEnd(date)"
-                      [class.range-start]="isRangeStart(date)"
-                      [class.btn-light]="isActive(date)"
-                      [class.bg-primary]="isActive(date)"
-                      [class.range]="isInRange(date)"
-                      [class.faded]="isInRange(date)"
-                     >
-                       {{ date.day }}
-                     </span>
-                   </ng-template>
+             
+              <div class="form-group" [ngClass]="{'focused':focus4===true}">
+                <label for="deadline">Deadline: </label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
                   </div>
-                  <div *ngIf="entityForm.get('startDate')?.invalid && entityForm.get('startDate')?.touched">
-                    <div *ngIf="entityForm.get('startDate')?.errors?.['required']">Start date is required.</div>
-                  </div>
+                  <input class="form-control datepicker" placeholder="Select date" name="dp2" [(ngModel)]="model2" id="deadline" formControlName="deadline" ngbDatepicker #d2="ngbDatepicker" (click)="d2.toggle()" (focus)="focus4=true" (blur)="focus4=false" type="text" [dayTemplate]="t1" (dateSelect)="endDateChanged($event)" autocomplete="off"/>
+                  <ng-template #t1 let-date let-focused="focused" >
+                   <span class="custom-day"
+                    [class.text-white]="isActive(date)"
+                    [class.range-end]="isRangeEnd(date)"
+                    [class.range-start]="isRangeStart(date)"
+                    [class.btn-light]="isActive(date)"
+                    [class.bg-primary]="isActive(date)"
+                    [class.range]="isInRange(date)"
+                    [class.faded]="isInRange(date)"
+                   >
+                     {{ date.day }}
+                   </span>
+                 </ng-template>
                 </div>
+                <div *ngIf="entityForm.get('deadline')?.invalid && entityForm.get('deadline')?.touched">
+                  <div *ngIf="entityForm.get('deadline')?.errors?.['required']">Deadline is required.</div>
+                </div>
+              </div>
                
-                <div class="form-group" [ngClass]="{'focused':focus4===true}">
-                  <label for="deadline">Deadline: </label>
-                  <div class="input-group">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
-                    </div>
-                    <input class="form-control datepicker" placeholder="Select date" name="dp2" [(ngModel)]="model2" id="deadline" formControlName="deadline" ngbDatepicker #d2="ngbDatepicker" (click)="d2.toggle()" (focus)="focus4=true" (blur)="focus4=false" type="text" [dayTemplate]="t1" (dateSelect)="endDateChanged($event)" autocomplete="off"/>
-                    <ng-template #t1 let-date let-focused="focused" >
-                     <span class="custom-day"
-                      [class.text-white]="isActive(date)"
-                      [class.range-end]="isRangeEnd(date)"
-                      [class.range-start]="isRangeStart(date)"
-                      [class.btn-light]="isActive(date)"
-                      [class.bg-primary]="isActive(date)"
-                      [class.range]="isInRange(date)"
-                      [class.faded]="isInRange(date)"
-                     >
-                       {{ date.day }}
-                     </span>
-                   </ng-template>
-                  </div>
-                  <div *ngIf="entityForm.get('deadline')?.invalid && entityForm.get('deadline')?.touched">
-                    <div *ngIf="entityForm.get('deadline')?.errors?.['required']">Deadline is required.</div>
-                  </div>
-                </div>
-                 
-              
-             
-              
             
-  
-             
-                <div class="form-group">
-                  <label for="autoFinance">Auto Finance:</label>
-                  <input class="form-control" type="number" id="autoFinance" formControlName="autoFinance">
-                  <div *ngIf="entityForm.get('autoFinance')?.invalid && entityForm.get('autoFinance')?.touched">
-                    <div *ngIf="entityForm.get('autoFinance')?.errors?.['required']">Auto finance amount is required.</div>
+           
+            
+          
+
+           
+              <div class="form-group">
+                <label for="autoFinance">Auto Finance:</label>
+                <input class="form-control" type="number" id="autoFinance" formControlName="autoFinance">
+                <div *ngIf="entityForm.get('autoFinance')?.invalid && entityForm.get('autoFinance')?.touched">
+                  <div *ngIf="entityForm.get('autoFinance')?.errors?.['required']">Auto finance amount is required.</div>
+                </div>
+              </div>
+            
+      
+              <div class="form-group">
+                  <label for="creditRequest">Credit Request:</label>
+                  <select class="form-control" id="creditRequest" formControlName="creditRequest">
+                    <option *ngFor="let request of creditRequests" [value]="request.id">{{ request.id }}</option>
+                  </select>
+                  <div *ngIf="entityForm.get('creditRequest')?.invalid && entityForm.get('creditRequest')?.touched">
+                    <div *ngIf="entityForm.get('creditRequest')?.errors?.['required']">Credit request is required.</div>
                   </div>
                 </div>
-              
-        
-                <div class="form-group">
-                    <label for="creditRequest">Credit Request:</label>
-                    <select class="form-control" id="creditRequest" formControlName="creditRequest">
-                      <option *ngFor="let request of creditRequests" [value]="request.id">{{ request.id }}</option>
-                    </select>
-                    <div *ngIf="entityForm.get('creditRequest')?.invalid && entityForm.get('creditRequest')?.touched">
-                      <div *ngIf="entityForm.get('creditRequest')?.errors?.['required']">Credit request is required.</div>
-                    </div>
-                  </div>
-                <button type="submit" class="btn btn-2 btn-primary " [disabled]="!entityForm.valid">Submit</button>
-              </form>
-            </div>
+              <button type="submit" class="btn btn-2 btn-primary " [disabled]="!entityForm.valid">Submit</button>
+            </form>
           </div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>

@@ -7,7 +7,7 @@ import { Credit } from './credit.model';
   providedIn: 'root'
 })
 export class CreditService {
-  private baseUrl = 'http://localhost:8082/loan/user/credit';
+  private baseUrl = 'http://localhost:8082/loan/user';
 
   constructor(private http: HttpClient) { }
 

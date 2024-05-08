@@ -28,6 +28,10 @@ import { TeamComponent } from './team/team.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CreditShowComponent } from './credit-show/credit-show.component';
 import { CreditEditComponent } from './credit-edit/credit-edit.component';
+import { CreditREditComponent } from './credit-r-edit/credit-r-edit.component';
+import { RecoveryShowComponent } from './recovery-show/recovery-show.component';
+import { RecoveryEditComponent } from './recovery-edit/recovery-edit.component';
+import { CreditRShowComponent } from './credit-r-show/credit-r-show.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +53,11 @@ import { CreditEditComponent } from './credit-edit/credit-edit.component';
     WhyComponent,
     TeamComponent,
     CreditShowComponent,
-    CreditEditComponent
+    CreditEditComponent,
+    CreditREditComponent,
+    RecoveryShowComponent,
+    RecoveryEditComponent,
+    CreditRShowComponent
   ],
   imports: [
     BrowserModule,

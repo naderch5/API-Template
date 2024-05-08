@@ -1,0 +1,49 @@
+<section class="section section-lg bg-gradient-default">
+    <div class="shape shape-style-1 shape-primary">
+        <span class="span-150"></span>
+        <span class="span-50"></span>
+        <span class="span-50"></span>
+        <span class="span-75"></span>
+        <span class="span-100"></span>
+        <span class="span-75"></span>
+        <span class="span-50"></span>
+        <span class="span-100"></span>
+        <span class="span-50"></span>
+        <span class="span-100"></span>
+      </div>
+      <div class="container pt-lg-md">
+  
+  <table class="table table-striped table-dark">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Amount recovered</th>
+        <th scope="col">Date</th>
+        <th scope="col">State</th>
+        <th scope="col">Credit ID</th>
+        <th scope="col">Actions <a routerLink="/recovery" title="Add" class="btn btn-icon btn-1 btn-success"><span class="btn-inner--icon"><i class="ni ni-fat-add"></i></span></a></th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let recovery of recoveries; let i = index">
+            <th scope="row">{{recovery.id}}</th>
+            <td>{{ recovery.amountRecovered }}</td>
+
+            <td>{{ recovery.date | date:'mediumDate' }}</td>
+            <td>{{ recovery.state }}</td>
+            <td>{{ recovery.credit?.idCredit }}</td>
+            <td class="d-flex">
+              <button title="Delete" (click)="deleteCredit(recovery.id)" class="btn btn-icon btn-2 btn-danger"><span class="btn-inner--icon"><i class="ni ni-basket"></i></span></button> 
+              <a [routerLink]="['/recovery',recovery.id]" title="Update" class="btn btn-icon btn-2 btn-success"><span class="btn-inner--icon"><i class="ni ni-settings"></i></span></a>
+            </td>
+          </tr>
+    </tbody>
+  </table>
+  <nav aria-label="Page navigation example">
+    <ngb-pagination [collectionSize]="totalItems" [(page)]="currentPage" aria-label="Default pagination">
+      <ng-template ngbPaginationPrevious><i class="fa fa-angle-left"></i></ng-template>
+      <ng-template ngbPaginationNext><i class="fa fa-angle-right"></i></ng-template>
+    </ngb-pagination>
+  </nav>
+      </div>
+  </section>

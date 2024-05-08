@@ -7,7 +7,7 @@ export interface CreditRequest {
     guarantee: string;
     salary: number;
     description: string;
-    userId: number;
+    user_id: number;
     // You can add more properties as needed
   }
   

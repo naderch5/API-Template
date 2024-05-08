@@ -18,6 +18,12 @@ import { RecoveryComponent } from './recovery/recovery.component';
 import { HomeeComponent } from './homee/homee.component';
 import { CreditShowComponent } from './credit-show/credit-show.component';
 import { CreditEditComponent } from './credit-edit/credit-edit.component';
+import { CreditREditComponent } from './credit-r-edit/credit-r-edit.component';
+import { RecoveryShowComponent } from './recovery-show/recovery-show.component';
+import { RecoveryEditComponent } from './recovery-edit/recovery-edit.component';
+import { CreditRShowComponent } from './credit-r-show/credit-r-show.component';
+
+
 
 const routes: Routes =[
     { path: 'home',             component: HomeComponent },
@@ -35,6 +41,10 @@ const routes: Routes =[
     {path:'recovery',component:RecoveryComponent},
     {path:'credits', component: CreditShowComponent},
     {path: 'credit/:id', component: CreditEditComponent},
+    {path: 'creditR/:id', component: CreditREditComponent},
+    {path: 'recoveries', component: RecoveryShowComponent},
+    {path: 'creditsr', component: CreditRShowComponent},
+    {path: 'recovery/:id', component: RecoveryEditComponent},
     { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 

@@ -6,7 +6,7 @@ export interface Credit {
     startDate: Date;       // Start date of the credit
     deadline: Date;        // Deadline for the credit
     autoFinance: number;
-    CreditRequest  : number;  // Auto finance amount for the credit
+    creditRequest  : CreditRequest;  // Auto finance amount for the credit
     // Add more properties as needed
   }
   

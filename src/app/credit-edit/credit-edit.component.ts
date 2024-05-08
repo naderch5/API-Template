@@ -91,31 +91,34 @@ startDateChanged(date){
     this.route.params.subscribe(params => {
       this.currentId = params['id']; // Access the 'id' parameter from the URL
       console.log('Test ID:', this.currentId);
+      
+      // Fetch credit data and initialize form
+      this.cs.getCredit(this.currentId).subscribe((credit) => {
+        this.entityForm = this.fb.group({
+          deadline: [this.fromDateO(credit.deadline), Validators.required],
+          startDate: [this.fromDateO(credit.startDate), Validators.required],
+          autoFinance: [credit.autoFinance, Validators.required],
+          creditRequest: [credit.creditRequest?.id, Validators.required] 
+        });
+
+        // Output form value after initialization
+        console.log(this.entityForm.value);
+      });
     });
+
+    // Fetch all credit requests
     this.crs.getAllCreditRequests().subscribe(creditRequests => {
       this.creditRequests = creditRequests;
- 
     });
-    this.cs.getCredit(this.currentId).subscribe((credit)=>{
-      this.entityForm = this.fb.group({
-        deadline: [this.fromDateO(credit.deadline), Validators.required],
-        startDate: [this.fromDateO(credit.startDate), Validators.required],
-        autoFinance: [credit.autoFinance, Validators.required],
-        creditRequest: [credit.CreditRequest, Validators.required] 
-  
-      });
-    })
-    console.log(this.entityForm.value);
-
-
-
   }
+
   toDateF( dateObject) {
+    console.log(dateObject)
     const { year, month, day } = dateObject;
-  
   
     return new Date(year, month - 1, day);
   }
+
   onSubmit() {
     if (this.entityForm?.valid) {
       console.log("object");
@@ -124,14 +127,16 @@ startDateChanged(date){
         creditRequest: this.creditRequests.find(request=>request.id==this.entityForm.value.creditRequest),
         startDate: this.toDateF(this.entityForm.value.startDate),
         deadline: this.toDateF(this.entityForm.value.deadline),
-        idCredit: this.currentId};
+        idCredit: this.currentId
+      };
         
       this.cs.updateCredit(requestData).subscribe(data=>{
         console.log(data);
       });  
     } else {    }
   }
-   fromDateO(t) {
+  
+  fromDateO(t) {
     // Create a new Date object using the provided string
     const date = new Date(t);
   
