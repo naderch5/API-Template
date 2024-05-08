@@ -1,0 +1,58 @@
+<section class="section section-lg bg-gradient-default">
+    <div class="shape shape-style-1 shape-primary">
+        <span class="span-150"></span>
+        <span class="span-50"></span>
+        <span class="span-50"></span>
+        <span class="span-75"></span>
+        <span class="span-100"></span>
+        <span class="span-75"></span>
+        <span class="span-50"></span>
+        <span class="span-100"></span>
+        <span class="span-50"></span>
+        <span class="span-100"></span>
+      </div>
+      <div class="container pt-lg-md">
+
+<table class="table table-striped table-dark">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col"> period</th>
+        <th scope="col">amount</th>
+        <th scope="col">interest</th>
+        <th scope="col"> partName</th>
+        <th scope="col">project</th>
+        
+        <th scope="col">Actions <a routerLink="/contrat" title="Add" class="btn btn-icon btn-1 btn-success"><span class="btn-inner--icon"><i class="ni ni-fat-add"></i></span></a></th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let contrat of contrats">
+            <th scope="row">{{contrat.idContrat}}</th>
+            <td>{{ contrat.period }}</td>
+            <td>{{ contrat.amount }}</td>
+            <td>{{ contrat.interest }}</td>
+            <td>{{ contrat.partName }}</td>
+            <td>{{ contrat.project?.idProject }}</td>
+            
+            <td class="d-flex">
+                <button title="Delete" (click)="deleteContrat(contrat.idContrat)" class="btn btn-icon btn-2 btn-danger">
+                    <span class="btn-inner--icon"><i class="ni ni-basket"></i></span>
+                </button> 
+                <a [routerLink]="['/contrat', contrat.idContrat]" title="Update" class="btn btn-icon btn-2 btn-success">
+                    <span class="btn-inner--icon"><i class="ni ni-settings"></i></span>
+                </a>
+            </td>
+        </tr>
+        
+    </tbody>
+</table>
+<!-- <nav aria-label="Page navigation example">
+    <ngb-pagination [collectionSize]="totalItems" [(page)]="currentPage" aria-label="Default pagination">
+      <ng-template ngbPaginationPrevious><i class="fa fa-angle-left"></i></ng-template>
+      <ng-template ngbPaginationNext><i class="fa fa-angle-right"></i></ng-template>
+    </ngb-pagination>
+  </nav> -->
+      </div>
+</section>
+

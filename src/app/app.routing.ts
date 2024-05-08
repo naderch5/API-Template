@@ -16,7 +16,15 @@ import { CreditComponent } from './credit/credit.component';
 import { CreditRequestComponent } from './credit-request/credit-request.component';
 import { RecoveryComponent } from './recovery/recovery.component';
 import { HomeeComponent } from './homee/homee.component';
-
+import { ProjectRequestShowComponent } from './project-request-show/project-request-show.component';
+import { ContratComponent } from './contrat/contrat.component';
+import { EditContratComponent } from './edit-contrat/edit-contrat.component';
+import { ProjectShowComponent } from './project-show/project-show.component';
+import { ContratShowComponent } from './contrat-show/contrat-show.component';
+import { ProjectRequestEditComponent } from './project-request-edit/project-request-edit.component';
+import { ProjectRequestComponent } from './project-request/project-request.component';
+import { ProjectEditComponent } from './project-edit/project-edit.component';
+import { ProjectComponent } from './project/project.component';
 const routes: Routes =[
     { path: 'home',             component: HomeComponent },
     { path: 'user-profile',     component: ProfileComponent },
@@ -31,6 +39,15 @@ const routes: Routes =[
     {path:'credit',component:CreditComponent},
     {path:'creditR',component:CreditRequestComponent},
     {path:'recovery',component:RecoveryComponent},
+    {path:'projectRequest',component:ProjectRequestShowComponent},
+    {path:'ajoutcontrat',component:ContratComponent},
+    {path:'Editcontrat',component:EditContratComponent},
+    {path:'EditprojectRequest',component:ProjectRequestEditComponent},
+    {path:'project',component:ProjectShowComponent},
+    {path:'contrat',component:ContratShowComponent},
+    {path:'projectRequestAdd',component:ProjectRequestComponent},
+    {path:'Editproject',component:ProjectEditComponent},
+    {path:'ajoutprojet',component:ProjectComponent},
     { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 

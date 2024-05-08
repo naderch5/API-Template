@@ -1,0 +1,62 @@
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+
+
+<form *ngIf="entityForm" [formGroup]="entityForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="period"> period:</label>
+      <input type="date" id="period" formControlName="period">
+      <div *ngIf="entityForm.get('period')?.invalid && entityForm.get('period')?.touched">
+        <div *ngIf="entityForm.get('period')?.errors?.['required']"> period is required.</div>
+        <div *ngIf="entityForm.get('period')?.errors?.['invalidPeriod']">period must be between 6 and 36 months.</div>
+      </div>
+    </div>
+  
+    <div>
+      <label for="amount">amount:</label>
+      <input type="number" id="amount" formControlName="amount">
+      <div *ngIf="entityForm.get('amount')?.invalid && entityForm.get('amount')?.touched">
+        <div *ngIf="entityForm.get('amount')?.errors?.['required']">amount is required.</div>
+        <div *ngIf="entityForm.get('amount')?.errors?.['insufficientAmount']">Insufficient amount.</div>
+      </div>
+    </div>
+  
+    <div>
+      <label for="interest">interest:</label>
+      <input type="number" id="interest" formControlName="interest">
+      <div *ngIf="entityForm.get('interest')?.invalid && entityForm.get('interest')?.touched">
+        <div *ngIf="entityForm.get('interest')?.errors?.['required']">interest is required.</div>
+        <div *ngIf="entityForm.get('interest')?.errors?.['invalidInterest']">interest must be between 1000 and 100000.</div>
+      </div>
+    </div>
+  
+    <div>
+      <label for="partName">partName:</label>
+      <input type="text" id="partName" formControlName="partName">
+      <div *ngIf="entityForm.get('partName')?.invalid && entityForm.get('partName')?.touched">
+        <div *ngIf="entityForm.get('partName')?.errors?.['required']">partName is required.</div>
+        <div *ngIf="entityForm.get('partName')?.errors?.['invalidPartName']">partName must be between 18 and 65.</div>
+      </div>
+    </div>
+  
+ 
+  
+    <div>
+      <label for="project">project ID:</label>
+      <input type="number" id="project" formControlName="project">
+      <div *ngIf="entityForm.get('project')?.invalid && entityForm.get('project')?.touched">
+        <div *ngIf="entityForm.get('project')?.errors?.['required']">project is required.</div>
+      </div>
+    </div>
+  
+    <button type="submit" [disabled]="!entityForm.valid">Submit</button>
+  </form>
+  
+

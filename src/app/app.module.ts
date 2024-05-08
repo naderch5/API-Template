@@ -25,6 +25,16 @@ import { InfoComponent } from './info/info.component';
 import { ServiceComponent } from './service/service.component';
 import { WhyComponent } from './why/why.component';
 import { TeamComponent } from './team/team.component';
+import { HttpClientModule } from '@angular/common/http';
+import { ProjectEditComponent } from './project-edit/project-edit.component';
+import { ProjectRequestEditComponent } from './project-request-edit/project-request-edit.component';
+import { ProjectRequestShowComponent } from './project-request-show/project-request-show.component';
+import { ProjectRequestComponent } from './project-request/project-request.component';
+import { ContratComponent } from './contrat/contrat.component';
+import { EditContratComponent } from './edit-contrat/edit-contrat.component';
+import { ProjectShowComponent } from './project-show/project-show.component';
+import { ContratShowComponent } from './contrat-show/contrat-show.component';
+import { ProjectComponent } from './project/project.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +54,17 @@ import { TeamComponent } from './team/team.component';
     InfoComponent,
     ServiceComponent,
     WhyComponent,
-    TeamComponent
+    TeamComponent,
+ ProjectRequestEditComponent ,
+ ProjectRequestShowComponent,
+ ProjectEditComponent,
+ ProjectRequestComponent,
+ ContratComponent,
+ EditContratComponent,
+ ProjectShowComponent,
+ ContratShowComponent,
+ ProjectComponent
+  
   ],
   imports: [
     BrowserModule,
@@ -53,9 +73,11 @@ import { TeamComponent } from './team/team.component';
     RouterModule,
     AppRoutingModule,
     HomeModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+

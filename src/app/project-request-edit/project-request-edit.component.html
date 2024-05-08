@@ -1,0 +1,75 @@
+
+<br>
+<br>
+<br>
+
+
+
+
+
+<form *ngIf="entityForm" [formGroup]="entityForm" (ngSubmit)="onSubmit()">
+  <div>
+      <label for="risque">risque:</label>
+      <input type="number" id="risque" formControlName="risque">
+      <div *ngIf="entityForm.get('risque')?.invalid && entityForm.get('risque')?.touched">
+          <div *ngIf="entityForm.get('risque')?.errors?.['required']">risque is required.</div>
+          <div *ngIf="entityForm.get('risque')?.errors?.['invalidRisque']">risque must be between 0 and 100 months.</div>
+      </div>
+  </div>
+
+  <div>
+      <label for="fundNeeds">Fund Needs:</label>
+      <input type="number" id="fundNeeds" formControlName="fundNeeds">
+      <div *ngIf="entityForm.get('fundNeeds')?.invalid && entityForm.get('fundNeeds')?.touched">
+          <div *ngIf="entityForm.get('fundNeeds')?.errors?.['required']">Fund Needs is required.</div>
+          <div *ngIf="entityForm.get('fundNeeds')?.errors?.['insufficientFundNeeds']">Insufficient Fund Needs.</div>
+      </div>
+  </div>
+
+  <div>
+      <label for="caEstimated">CA Estimated:</label>
+      <input type="number" id="caEstimated" formControlName="caEstimated">
+      <div *ngIf="entityForm.get('caEstimated')?.invalid && entityForm.get('caEstimated')?.touched">
+          <div *ngIf="entityForm.get('caEstimated')?.errors?.['required']">CA Estimated is required.</div>
+          <div *ngIf="entityForm.get('caEstimated')?.errors?.['invalidCAEstimated']">CA Estimated must be between 1000 and 100000.</div>
+      </div>
+  </div>
+
+  <div>
+      <label for="initialBudget">Initial Budget:</label>
+      <input type="number" id="initialBudget" formControlName="initialBudget">
+      <div *ngIf="entityForm.get('initialBudget')?.invalid && entityForm.get('initialBudget')?.touched">
+          <div *ngIf="entityForm.get('initialBudget')?.errors?.['required']">Initial Budget is required.</div>
+          <div *ngIf="entityForm.get('initialBudget')?.errors?.['invalidInitialBudget']">Initial Budget must be between 1000 and 5000000.</div>
+      </div>
+  </div>
+
+  <div>
+      <label for="objectif">objectif:</label>
+      <input type="text" id="objectif" formControlName="objectif">
+      <div *ngIf="entityForm.get('objectif')?.invalid && entityForm.get('objectif')?.touched">
+          <div *ngIf="entityForm.get('objectif')?.errors?.['required']">objectif is required.</div>
+      </div>
+  </div>
+
+  <div>
+      <label for="estimatedProgression">Salary:</label>
+      <input type="number" id="estimatedProgression" formControlName="estimatedProgression">
+      <div *ngIf="entityForm.get('estimatedProgression')?.invalid && entityForm.get('estimatedProgression')?.touched">
+          <div *ngIf="entityForm.get('estimatedProgression')?.errors?.['required']">Estimated Progression is required.</div>
+          <div *ngIf="entityForm.get('estimatedProgression')?.errors?.['invalidEstimatedProgression']">Estimated Progression must be between 0 and 100.</div>
+      </div>
+  </div>
+
+  <div>
+      <label for="plannedIncome">Planned Income:</label>
+      <input type="number" id="plannedIncome" formControlName="plannedIncome">
+      <div *ngIf="entityForm.get('plannedIncome')?.invalid && entityForm.get('plannedIncome')?.touched">
+          <div *ngIf="entityForm.get('plannedIncome')?.errors?.['required']">Planned Income is required.</div>
+          <div *ngIf="entityForm.get('plannedIncome')?.errors?.['invalidPlannedIncome']">Planned Income must be between 0 and 500000000.</div>
+      </div>
+  </div>
+
+  <button type="submit" [disabled]="!entityForm.valid">Submit</button>
+</form>
+

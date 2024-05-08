@@ -1,0 +1,64 @@
+<br/>
+<br/>
+<br/>
+<br/>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+<form *ngIf="entityForm" [formGroup]="entityForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="name">name:</label>
+      <input type="text" id="name" formControlName="name">
+      <div *ngIf="entityForm.get('name')?.invalid && entityForm.get('name')?.touched">
+        <div *ngIf="entityForm.get('name')?.errors?.['required']">name is required.</div>
+        <div *ngIf="entityForm.get('name')?.errors?.['invalidName']">name must be .</div>
+      </div>
+    </div>
+  
+    <div>
+      <label for="description">description:</label>
+      <input type="text" id="description" formControlName="description">
+      <div *ngIf="entityForm.get('description')?.invalid && entityForm.get('description')?.touched">
+        <div *ngIf="entityForm.get('description')?.errors?.['required']">Fund Needs is required.</div>
+        <div *ngIf="entityForm.get('description')?.errors?.['insufficientDescription']">Insufficient description.</div>
+      </div>
+    </div>
+  
+    <div>
+      <label for="etat"> etat:</label>
+      <input type="text" id="etat" formControlName="etat">
+      <div *ngIf="entityForm.get('etat')?.invalid && entityForm.get('etat')?.touched">
+        <div *ngIf="entityForm.get('etat')?.errors?.['required']">etat is required.</div>
+        <div *ngIf="entityForm.get('etat')?.errors?.['invalidEtat']">etat must be between .</div>
+      </div>
+    </div>
+  
+    <div>
+      <label for="ptype">ptype:</label>
+      <input type="text" id="ptype" formControlName="ptype">
+      <div *ngIf="entityForm.get('ptype')?.invalid && entityForm.get('ptype')?.touched">
+        <div *ngIf="entityForm.get('ptype')?.errors?.['required']">ptype is required.</div>
+        <div *ngIf="entityForm.get('ptype')?.errors?.['invalidType']">ptype must be between 1000 and 5000000.</div>
+      </div>
+    </div>
+  
+  
+    
+  
+    <div>
+      <label for="projectRequest">projectRequest:</label>
+      <input type="number" id="projectRequest" formControlName="projectRequest">
+      <div *ngIf="entityForm.get('projectRequest')?.invalid && entityForm.get('projectRequest')?.touched">
+        <div *ngIf="entityForm.get('projectRequest')?.errors?.['required']">projectRequest is required.</div>
+      </div>
+    </div>
+  
+    <button type="submit" [disabled]="!entityForm.valid">Submit</button>
+  </form>
+  
+
+
