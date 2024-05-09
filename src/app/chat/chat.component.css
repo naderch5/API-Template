@@ -22,10 +22,11 @@
 /* Add this CSS to style the chat messages */
 .chatMessage {
     margin-bottom: 10px;
+    max-width: 60%;
+    border-radius: 0.5rem;
 }
 
 .message-box {
-    max-width: 70%;
     padding: 10px;
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -44,6 +45,7 @@
 .current-user {
     align-self: flex-end;
     background-color: #DCF8C6; /* Example color for current user messages */
+    margin-left: auto;
 }
 
 /* Style for messages from other users */

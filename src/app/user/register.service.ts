@@ -12,8 +12,9 @@ export class RegisterService {
   constructor(private http: HttpClient) { }
 
   registerUser(user: any): Observable<any> {
+    const token = localStorage.getItem('token');
 
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
 
     return this.http.post(`${this.baseUrl}/register`, user,{headers});
   }

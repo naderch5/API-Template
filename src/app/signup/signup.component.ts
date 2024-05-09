@@ -28,6 +28,19 @@ export class SignupComponent implements OnInit {
           roleName: ['', [Validators.required, Validators.minLength(1)]]
         });
       }
+      mapRoleNameToAuthority(roleName:String){
+        switch (roleName) {
+          case "USER":
+            return {roleId: 2, authority:"USER"}
+            break;
+          case "ADMIN":
+            return {roleId: 1, authority:"ADMIN"}
+            break;
+          default:
+            return {roleId: 3, authority:"INVESTOR"}
+            break;
+        }
+      }
     
       alphabeticalValidator() {
         return (control) => {
@@ -42,7 +55,8 @@ export class SignupComponent implements OnInit {
             const formData = {
                 ...this.registerForm.value,
                 telephone: parseInt(this.registerForm.value.telephone, 10),
-                cin: parseInt(this.registerForm.value.cin, 10)
+                cin: parseInt(this.registerForm.value.cin, 10),
+                authorities: [this.mapRoleNameToAuthority(this.registerForm.value.roleName)]
             };
           // Call your authentication service to handle form submission
           console.log('Form submitted:', this.registerForm.value);
