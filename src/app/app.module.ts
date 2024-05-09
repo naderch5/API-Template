@@ -30,6 +30,7 @@ import { UsersComponent } from './users/users.component';
 import { MessagesComponent } from './messages/messages.component';
 import { ChatComponent } from './chat/chat.component';
 import { UpdateUserComponent } from './update-user/update-user.component';
+import { Base64ToImageUrlPipe } from './base64-to-image-url.pipe';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { UpdateUserComponent } from './update-user/update-user.component';
     UsersComponent,
     MessagesComponent,
     ChatComponent,
-    UpdateUserComponent
+    UpdateUserComponent,
+    Base64ToImageUrlPipe
   ],
   imports: [
     BrowserModule,

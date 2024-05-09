@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RegisterService } from '../user/register.service';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-signup',
@@ -14,7 +15,7 @@ export class SignupComponent implements OnInit {
     focus;
     focus1;
     focus2;
-    constructor(private formBuilder: FormBuilder,private authService: RegisterService) { }
+    constructor(private formBuilder: FormBuilder,private authService: RegisterService, private router: Router) { }
     ngOnInit(): void {
         this.registerForm = this.formBuilder.group({
           username: ['', [Validators.required, Validators.minLength(5)]],
@@ -27,19 +28,6 @@ export class SignupComponent implements OnInit {
           job: ['', [Validators.required]],
           roleName: ['', [Validators.required, Validators.minLength(1)]]
         });
-      }
-      mapRoleNameToAuthority(roleName:String){
-        switch (roleName) {
-          case "USER":
-            return {roleId: 2, authority:"USER"}
-            break;
-          case "ADMIN":
-            return {roleId: 1, authority:"ADMIN"}
-            break;
-          default:
-            return {roleId: 3, authority:"INVESTOR"}
-            break;
-        }
       }
     
       alphabeticalValidator() {
@@ -55,8 +43,7 @@ export class SignupComponent implements OnInit {
             const formData = {
                 ...this.registerForm.value,
                 telephone: parseInt(this.registerForm.value.telephone, 10),
-                cin: parseInt(this.registerForm.value.cin, 10),
-                authorities: [this.mapRoleNameToAuthority(this.registerForm.value.roleName)]
+                cin: parseInt(this.registerForm.value.cin, 10)
             };
           // Call your authentication service to handle form submission
           console.log('Form submitted:', this.registerForm.value);
@@ -65,6 +52,10 @@ export class SignupComponent implements OnInit {
           })
           this.authService.registerUser(formData).subscribe((data)=>{
             console.log(data);
+            if(data){
+              this.router.navigate(['login'])
+            }
+         
           })
         } else {
           // Form is invalid, mark all fields as touched to display error messages

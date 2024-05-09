@@ -9,10 +9,11 @@ import { User } from '../user';
 export class RegisterService {
   private baseUrl = 'http://localhost:8082/auth'; 
   public token = "";
+  public user;
   constructor(private http: HttpClient) { }
 
   registerUser(user: any): Observable<any> {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('token') || this.token;
 
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
 
@@ -25,7 +26,7 @@ export class RegisterService {
   getAllUsers(): Observable<any> {
     /*const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('token')}`);
     console.log(headers); */
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('token') || this.token;
     if (token) {
       const headers = new HttpHeaders({
         'Authorization': `Bearer ${token}`
@@ -41,7 +42,7 @@ export class RegisterService {
   getUser(id: number): Observable<any> {
     /*const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('token')}`);
     console.log(headers); */
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('token') || this.token;
     if (token) {
       const headers = new HttpHeaders({
         'Authorization': `Bearer ${token}`
@@ -54,26 +55,39 @@ export class RegisterService {
     }
   
   }
-  updateUser(id:number,user: User): Observable<any> {
-    /*const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('token')}`);
-    console.log(headers); */
-    const token = localStorage.getItem('token');
+
+  updateUser(id: number, user: any): Observable<any> {
+    console.log(user);
+    const token = localStorage.getItem('token') || this.token;
     if (token) {
       const headers = new HttpHeaders({
-        'Authorization': `Bearer ${token}`
-      });
-      return this.http.put("http://localhost:8082/admin/"+id,user, { headers });
+        'Authorization': `Bearer ${token}`      });
+      const formData = new FormData()
+
+      formData.append('username', user.username);
+      formData.append('firstname', user.firstname);
+      formData.append('lastname', user.lastname);
+      formData.append('telephone', user.telephone);
+      formData.append('address', user.address);
+      formData.append('cin', user.cin);
+      formData.append('job', user.job);
+      formData.append('profileImage', user.profileImage as Blob); 
+      formData.append('roleName', user.roleName);
+      formData.append('profileImageContentType',user.profileImageContentType)
+      formData.append('authorities', JSON.stringify(user.authorities));
+   
+  
+  
+      return this.http.put(`http://localhost:8082/admin/${id}`, formData, { headers });
     } else {
-      // Handle case where token doesn't exist
-      // For example, redirect to login page
       return null;
     }
-  
   }
+  
   deleteUser(id: number): Observable<any> {
     /*const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('token')}`);
     console.log(headers); */
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('token') || this.token;
     if (token) {
       const headers = new HttpHeaders({
         'Authorization': `Bearer ${token}`
@@ -89,7 +103,7 @@ export class RegisterService {
   sendMessage(message:any): Observable<any> {
     /*const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('token')}`);
     console.log(headers); */
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('token') || this.token;
     if (token) {
       const headers = new HttpHeaders({
         'Authorization': `Bearer ${token}`
@@ -104,7 +118,7 @@ export class RegisterService {
   }
   getMessages(): Observable<any> {
     // const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('token')}`);
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('token') || this.token;
     // Ensure token exists before adding to headers
     let headers = {};
     if (token) {
@@ -113,7 +127,7 @@ export class RegisterService {
       };
     }
     console.log(headers);
-    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    const currentUser = JSON.parse(localStorage.getItem('currentUser')) || JSON.parse(this.user);
 
     // Access the userId property from the currentUser object
     const userId = currentUser.userId;
@@ -130,7 +144,7 @@ export class RegisterService {
       };
     }
     console.log(headers);
-    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    const currentUser = JSON.parse(localStorage.getItem('currentUser')) || JSON.parse(this.user);
 
     // Access the userId property from the currentUser object
     const userId = currentUser.userId;
@@ -147,10 +161,13 @@ export class RegisterService {
       };
     }
     console.log(headers);
-    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    const currentUser = JSON.parse(localStorage.getItem('currentUser')) || JSON.parse(this.user);
 
     // Access the userId property from the currentUser object
     const userId = currentUser.userId;
     return this.http.get(`http://localhost:8082/api/messages/newMessages/${id}`,{headers});
   }  
+  calculateRolePercentage(): Observable<any> {
+    return this.http.get(`http://localhost:8082/admin/calculateRolePercentage`);
+  }
 }

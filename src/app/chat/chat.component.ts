@@ -13,7 +13,7 @@ export class ChatComponent implements OnInit {
   newMessageContent:""
   newConnections: any[]
   recipientId: number
-  currentUser= JSON.parse(localStorage.getItem('currentUser')).userId;
+  currentUser= JSON.parse(localStorage.getItem('currentUser'))?.userId || JSON.parse(this.cs.user).userId;
   intervalSubscription: Subscription;
 
   constructor(private cs :RegisterService) { }
