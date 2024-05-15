@@ -23,7 +23,7 @@
         <th scope="col"> ptype</th>
         <th scope="col">projectRequest</th>
        
-        <th scope="col">Actions <a routerLink="/project" title="Add" class="btn btn-icon btn-1 btn-success"><span class="btn-inner--icon"><i class="ni ni-fat-add"></i></span></a></th>
+        <th scope="col">Actions <a href="http://localhost:4200/#/ajoutprojet" title="Add" class="btn btn-icon btn-1 btn-success"><span class="btn-inner--icon"><i class="ni ni-fat-add"></i></span></a></th>
       </tr>
     </thead>
     <tbody>
@@ -41,7 +41,7 @@
                 <button title="Delete" (click)="deleteProject(project.idProject)" class="btn btn-icon btn-2 btn-danger">
                     <span class="btn-inner--icon"><i class="ni ni-basket"></i></span>
                 </button> 
-                <a [routerLink]="['/project', project.idProject]" title="Update" class="btn btn-icon btn-2 btn-success">
+                <a [routerLink]="['/Editproject', project.idProject]" title="Update" class="btn btn-icon btn-2 btn-success">
                     <span class="btn-inner--icon"><i class="ni ni-settings"></i></span>
                 </a>
             </td>

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Contrat } from './contrat.model';
@@ -34,6 +34,15 @@ export class ContratService {
 
   getAllContrats():Observable<Contrat[]>{
     return this.http.get<Contrat[]>(`${this.baseUrl}/contrats`);
+  }
+
+
+
+  getPdf(id: number): Observable<any> {
+    return this.http.get(`http://localhost:8082/project/pdf/${id}`, {
+      responseType: 'arraybuffer', // Specify the response type as arraybuffer
+      headers: new HttpHeaders().append('Content-Type', 'application/json')
+    });
   }
 
 }

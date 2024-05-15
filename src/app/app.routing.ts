@@ -41,12 +41,12 @@ const routes: Routes =[
     {path:'recovery',component:RecoveryComponent},
     {path:'projectRequest',component:ProjectRequestShowComponent},
     {path:'ajoutcontrat',component:ContratComponent},
-    {path:'Editcontrat',component:EditContratComponent},
-    {path:'EditprojectRequest',component:ProjectRequestEditComponent},
+    {path:'Editcontrat/:id',component:EditContratComponent},
+    {path:'EditprojectRequest/:id',component:ProjectRequestEditComponent},
     {path:'project',component:ProjectShowComponent},
     {path:'contrat',component:ContratShowComponent},
     {path:'projectRequestAdd',component:ProjectRequestComponent},
-    {path:'Editproject',component:ProjectEditComponent},
+    {path:'Editproject/:id',component:ProjectEditComponent},
     {path:'ajoutprojet',component:ProjectComponent},
     { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];

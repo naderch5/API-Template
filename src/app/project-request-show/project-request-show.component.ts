@@ -13,6 +13,8 @@ export class ProjectRequestShowComponent implements OnInit {
   totalItems: number = 0;
   currentPage: number = 1;
   itemsPerPage: number = 5;
+  khafif:Number[] = [0,1,2] ;
+  active1:Number[]=[];
   constructor(private prs: ProjectRequestService) { }
 
   ngOnInit(): void {

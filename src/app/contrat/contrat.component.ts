@@ -13,12 +13,10 @@ import { Project } from '../project.model';
 export class ContratComponent implements OnInit {
   entityForm: FormGroup | undefined;
   projects:Project[] = []; 
-  requestId: number | undefined;
   constructor(private fb: FormBuilder,private ps :ProjectService,private pc :ContratService) { }
 
   ngOnInit(): void {
     this.entityForm = this.fb.group({
-      idContrat: [this.requestId],
     period: ['', [Validators.required, this.PeriodValidator]],
       amount: ['', [Validators.required, this.AmountValidator]],
       interest: ['', [Validators.required, this.InterestValidator]],
@@ -33,19 +31,33 @@ export class ContratComponent implements OnInit {
 });
 } 
 
+// Method to generate PDF
+generatePdf(id: number): void {
+  // Call CreditService to generate PDF
+  this.pc.getPdf(id).subscribe(
+    (pdfData: Blob) => {
+      const file = new Blob([pdfData], { type: 'application/pdf' });
+      window.open(URL.createObjectURL(file),"_blank")
+    },
+    error => {
+      console.error('Error fetching PDF:', error);
+      // Handle error
+    }
+  );
 
-
+}
 onSubmit() {
-  if (this.entityForm?.valid && this.requestId) {
+  if (this.entityForm?.valid) {
     console.log("object");
     const requestData = {
       ...this.entityForm.value,
       project: this.projects.find(request=> request.idProject == this.entityForm.value.project) };
     this.pc.addContrat(requestData).subscribe(data=>{
       console.log(data);
+      this.generatePdf(data.idContrat);
     });  
   } else {
-    console.log("Form validation failed"+this.requestId);
+    console.log("Form validation failed");
     // Form validation failed, do something
   }
 }
@@ -68,7 +80,7 @@ AmountValidator(control: AbstractControl): ValidationErrors | null {
 
 InterestValidator(control: AbstractControl): ValidationErrors | null {
   const value = control.value;
-  if (value < 1000 || value > 100000) {
+  if (value < 10 || value > 100) {
     return { invalidInterest: true };
   }
   return null;

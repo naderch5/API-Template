@@ -1,45 +1,61 @@
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 
+<section class="section section-lg section-hero section-shaped">
+  <div class="shape shape-style-1 shape-primary">
+      <span class="span-150"></span>
+      <span class="span-50"></span>
+      <span class="span-50"></span>
+      <span class="span-75"></span>
+      <span class="span-100"></span>
+      <span class="span-75"></span>
+      <span class="span-50"></span>
+      <span class="span-100"></span>
+      <span class="span-50"></span>
+      <span class="span-100"></span>
+  </div>
+  <div class="container pt-lg-md">
+      <div class="row justify-content-center">
+          <div class="col-lg-5">
+              <div class="card bg-secondary shadow border-0">
+                  <div class="card-header bg-white">
+                      <div class="text-muted text-center mb-3">
+                          <p>Ajouter Credit Request</p>
+                      </div>
+                  </div>
+                  <div class="card-body px-lg-5 py-lg-5">
 
 
 
 <form *ngIf="entityForm" [formGroup]="entityForm" (ngSubmit)="onSubmit()">
-    <div>
+    <div class="form-group">
       <label for="period"> period:</label>
-      <input type="date" id="period" formControlName="period">
+      <input  class="form-control" type="date" id="period" formControlName="period">
       <div *ngIf="entityForm.get('period')?.invalid && entityForm.get('period')?.touched">
         <div *ngIf="entityForm.get('period')?.errors?.['required']"> period is required.</div>
         <div *ngIf="entityForm.get('period')?.errors?.['invalidPeriod']">period must be between 6 and 36 months.</div>
       </div>
     </div>
   
-    <div>
+    <div class="form-group">
       <label for="amount">amount:</label>
-      <input type="number" id="amount" formControlName="amount">
+      <input  class="form-control" type="number" id="amount" formControlName="amount">
       <div *ngIf="entityForm.get('amount')?.invalid && entityForm.get('amount')?.touched">
         <div *ngIf="entityForm.get('amount')?.errors?.['required']">amount is required.</div>
         <div *ngIf="entityForm.get('amount')?.errors?.['insufficientAmount']">Insufficient amount.</div>
       </div>
     </div>
   
-    <div>
+    <div class="form-group">
       <label for="interest">interest:</label>
-      <input type="number" id="interest" formControlName="interest">
+      <input  class="form-control" type="number" id="interest" formControlName="interest">
       <div *ngIf="entityForm.get('interest')?.invalid && entityForm.get('interest')?.touched">
         <div *ngIf="entityForm.get('interest')?.errors?.['required']">interest is required.</div>
         <div *ngIf="entityForm.get('interest')?.errors?.['invalidInterest']">interest must be between 1000 and 100000.</div>
       </div>
     </div>
   
-    <div>
+    <div class="form-group">
       <label for="partName">partName:</label>
-      <input type="text" id="partName" formControlName="partName">
+      <input  class="form-control" type="text" id="partName" formControlName="partName">
       <div *ngIf="entityForm.get('partName')?.invalid && entityForm.get('partName')?.touched">
         <div *ngIf="entityForm.get('partName')?.errors?.['required']">partName is required.</div>
         <div *ngIf="entityForm.get('partName')?.errors?.['invalidPartName']">partName must be between 18 and 65.</div>
@@ -48,15 +64,17 @@
   
  
   
-    <div>
+    <div class="form-group">
       <label for="project">project ID:</label>
-      <input type="number" id="project" formControlName="project">
+      <input  class="form-control" type="number" id="project" formControlName="project">
       <div *ngIf="entityForm.get('project')?.invalid && entityForm.get('project')?.touched">
         <div *ngIf="entityForm.get('project')?.errors?.['required']">project is required.</div>
       </div>
     </div>
   
-    <button type="submit" [disabled]="!entityForm.valid">Submit</button>
+    <button class="btn btn-2 btn-primary" type="submit" [disabled]="!entityForm.valid">Submit</button>
+    <a href="http://localhost:4200/#/Editcontrat" class="btn">Aller vers edit contrat</a>
+    <a href="http://localhost:4200/#/ajoutprojet" class="btn">Aller vers show projet</a>
   </form>
   
 

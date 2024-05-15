@@ -13,7 +13,6 @@ import { HttpClient } from '@angular/common/http';
 export class ProjectComponent implements OnInit {
   entityForm: FormGroup | undefined;
   projectRequests:ProjectRequest[] = []; 
-  requestId: number | undefined;
   reader = new FileReader();
   chartUrl: string;
 
@@ -23,7 +22,6 @@ export class ProjectComponent implements OnInit {
 
     this.ps.getProjectTypeStatisticsChart();
     this.entityForm = this.fb.group({
-      idProject: [this.requestId],
       name: ['', [Validators.required, this.NameValidator]],
       description: ['', [Validators.required, this.DescriptionValidator]],
       etat: ['', [Validators.required, this.EtatValidator]],
@@ -64,7 +62,7 @@ export class ProjectComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.entityForm?.valid && this.requestId) {
+    if (this.entityForm?.valid) {
       console.log("object");
       const requestData = {
         ...this.entityForm.value,
@@ -73,7 +71,6 @@ export class ProjectComponent implements OnInit {
         console.log(data);
       });  
     } else {
-      console.log("Form validation failed"+this.requestId);
       // Form validation failed, do something
     }
   }

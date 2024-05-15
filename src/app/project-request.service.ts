@@ -7,7 +7,7 @@ import { ProjectRequest } from './project-request.model';
   providedIn: 'root'
 })
 export class ProjectRequestService {
-  private baseUrl ='http://localhost:8082/project/api/projectRequest'
+  private baseUrl ='http://localhost:8082/project/api/projectrequest'
   constructor(private http: HttpClient) { 
 
   }
@@ -16,11 +16,11 @@ export class ProjectRequestService {
   }
 
   retrieveProjectRequest(id: number): Observable<ProjectRequest> {
-    return this.http.get<ProjectRequest>(`${this.baseUrl}/${id}`);
+    return this.http.get<ProjectRequest>(`http://localhost:8082/project/api/projectRequest/${id}`);
   }
 
   retrieveProjectRequests(): Observable<ProjectRequest[]> {
-    return this.http.get<ProjectRequest[]>(`${this.baseUrl}`);
+    return this.http.get<ProjectRequest[]>(`${this.baseUrl}s`);
   }
 
   deleteRequest(id: number): Observable<void> {
@@ -50,6 +50,6 @@ export class ProjectRequestService {
 
 
   getAllProjectRequests():Observable<ProjectRequest[]>{
-    return this.http.get<ProjectRequest[]>(`${this.baseUrl}`);
+    return this.http.get<ProjectRequest[]>(`http://localhost:8082/project/api/projectrequests`);
   }
 }

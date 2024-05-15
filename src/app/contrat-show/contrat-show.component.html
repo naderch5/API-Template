@@ -23,7 +23,7 @@
         <th scope="col"> partName</th>
         <th scope="col">project</th>
         
-        <th scope="col">Actions <a routerLink="/contrat" title="Add" class="btn btn-icon btn-1 btn-success"><span class="btn-inner--icon"><i class="ni ni-fat-add"></i></span></a></th>
+        <th scope="col">Actions <a href="http://localhost:4200/#/ajoutcontrat" title="Add" class="btn btn-icon btn-1 btn-success"><span class="btn-inner--icon"><i class="ni ni-fat-add"></i></span></a></th>
       </tr>
     </thead>
     <tbody>
@@ -39,20 +39,27 @@
                 <button title="Delete" (click)="deleteContrat(contrat.idContrat)" class="btn btn-icon btn-2 btn-danger">
                     <span class="btn-inner--icon"><i class="ni ni-basket"></i></span>
                 </button> 
-                <a [routerLink]="['/contrat', contrat.idContrat]" title="Update" class="btn btn-icon btn-2 btn-success">
+                <a  [routerLink]="['/Editcontrat', contrat.idContrat]" title="Update" class="btn btn-icon btn-2 btn-success">
                     <span class="btn-inner--icon"><i class="ni ni-settings"></i></span>
                 </a>
             </td>
         </tr>
-        
+        <nav aria-label="Page navigation example">
+          <div class="nav nav-pills justify-content-start">
+            <ul ngbNav #nav2="ngbNav" [(activeId)]="active1" type="pills" class="nav-pills-circle">
+              
+              <li *ngFor="let i of khafif" [ngbNavItem]="i">
+                <a ngbNavLink (click)="setPage(i+1)">
+                  <span class="nav-link-icon d-block">{{i+1}}</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </nav>
     </tbody>
+    
 </table>
-<!-- <nav aria-label="Page navigation example">
-    <ngb-pagination [collectionSize]="totalItems" [(page)]="currentPage" aria-label="Default pagination">
-      <ng-template ngbPaginationPrevious><i class="fa fa-angle-left"></i></ng-template>
-      <ng-template ngbPaginationNext><i class="fa fa-angle-right"></i></ng-template>
-    </ngb-pagination>
-  </nav> -->
+
       </div>
 </section>
 

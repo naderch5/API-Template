@@ -14,10 +14,13 @@ import { Contrat } from '../contrat.model';
 export class ContratShowComponent implements OnInit {
   projects:Project[];
   contrats:Contrat[];
+  khafif:Number[] = [] ;
+  active1:Number[]=[];
   pagedContrats: Contrat[] = [];
   totalItems: number = 0;
   currentPage: number = 1;
   itemsPerPage: number = 5;
+  
   constructor(private ps: ProjectService,private cs: ContratService) { }
 
   ngOnInit(): void {

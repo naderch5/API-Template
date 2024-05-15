@@ -38,6 +38,7 @@ export class EditContratComponent implements OnInit {
     if (this.requestId) {
       this.pc.retrieveContrat(this.requestId).subscribe(contrat => {
         this.entityForm?.patchValue(contrat);
+        
       });
     }
   }

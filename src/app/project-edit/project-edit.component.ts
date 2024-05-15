@@ -16,10 +16,7 @@ export class ProjectEditComponent implements OnInit {
   constructor(private fb: FormBuilder,private ps :ProjectService,private  prs:ProjectRequestService,private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(params => {
-      this.requestId = Number(params.get('id'));
-      this.loadProject();
-    });
+   
     this.entityForm = this.fb.group({
       idProject: [this.requestId],
       name: ['', [Validators.required, this.NameValidator]],
@@ -28,7 +25,10 @@ export class ProjectEditComponent implements OnInit {
       ptype: ['', [Validators.required, this.TypeValidator]],
       projectRequest: ['', Validators.required] // assuming userId is the foreign key
     });
-
+    this.route.paramMap.subscribe(params => {
+      this.requestId = Number(params.get('id'));
+      this.loadProject();
+    });
     // Convert numeric values to strings for the ptype control
     this.prs.getAllProjectRequests().subscribe(projectRequests => {
       this.projectRequests = projectRequests;
@@ -40,6 +40,7 @@ export class ProjectEditComponent implements OnInit {
     if (this.requestId) {
       this.ps.retrieveProject(this.requestId).subscribe(project => {
         this.entityForm?.patchValue(project);
+        this.entityForm.get('projectRequest').setValue(project.projectRequest.idRequest)
       });
     }
   }
