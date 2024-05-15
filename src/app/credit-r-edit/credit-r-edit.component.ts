@@ -71,7 +71,7 @@ export class CreditREditComponent implements OnInit {
             console.error('Error updating credit request:', error);
           }
         );
-    } else {
+    }  else {
       console.log('Form is invalid. Please check the input fields.');
     }
 }

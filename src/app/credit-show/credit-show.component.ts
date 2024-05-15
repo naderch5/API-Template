@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { CreditService } from '../credit.service';
-import { Credit } from '../credit.model';
+import { PdfService } from './../pdf.service';
+import { CreditService } from './../credit.service';
+import { Credit } from './../credit.model';
 
 @Component({
   selector: 'app-credit-show',
@@ -8,25 +9,33 @@ import { Credit } from '../credit.model';
   styleUrls: ['./credit-show.component.css']
 })
 export class CreditShowComponent implements OnInit {
-  credits:Credit[];
+  credits: Credit[];
   pagedCredits: Credit[] = [];
   totalItems: number = 0;
   currentPage: number = 1;
   itemsPerPage: number = 5;
-  constructor(private cs: CreditService) { }
+  pdfUrl: string;
+  active1;
+  round;
+// URL of the generated PDF
+
+  constructor(private cs: CreditService, private pdfService: PdfService) { }
 
   ngOnInit(): void {
     this.cs.getAllCredits().subscribe(credits => {
       this.credits = credits;
       this.totalItems = credits.length;
-      this.setPage(1); 
+      this.setPage(1);
+      this.round=Array.from(Array(Math.ceil(this.totalItems/this.itemsPerPage)).keys())
     });
   }
-  
+
   setPage(page: number) {
     this.currentPage = page;
     const startIndex = (page - 1) * this.itemsPerPage;
-    const endIndex = Math.min(startIndex + this.itemsPerPage, this.totalItems);
+    const endIndex = (page)*this.itemsPerPage;
+    
+    console.log("si: "+startIndex+" / ei: "+endIndex)
     this.pagedCredits = this.credits.slice(startIndex, endIndex);
   }
 
@@ -38,5 +47,20 @@ export class CreditShowComponent implements OnInit {
       this.setPage(this.currentPage); // Refresh pagination
     });
   }
-
+  
+   // Method to generate PDF
+   generatePdf(id: number): void {
+    // Call CreditService to generate PDF
+    this.cs.generatePdf(id).subscribe(
+      (pdfData: Blob) => {
+        const file = new Blob([pdfData], { type: 'application/pdf' });
+        this.pdfUrl = URL.createObjectURL(file);
+        window.open(this.pdfUrl,"_blank")
+      },
+      error => {
+        console.error('Error fetching PDF:', error);
+        // Handle error
+      }
+    );
+  }
 }

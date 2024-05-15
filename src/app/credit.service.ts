@@ -38,4 +38,17 @@ export class CreditService {
   updateCredit(credit: Credit): Observable<Credit> {
     return this.http.put<Credit>(`${this.baseUrl}/credit`, credit);
   }
+
+  generatePdf(id: number): Observable<Blob> {
+    // Define headers for the request to specify PDF content type
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/pdf',
+    });
+
+    // Make an HTTP GET request to retrieve the PDF from the backend
+    return this.http.get(`${this.baseUrl}/pdf/${id}`, {
+      headers: headers,
+      responseType: 'blob' // Specify response type as Blob
+    });
+  }
 }

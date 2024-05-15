@@ -4,6 +4,7 @@ import { CreditRequest } from './../credit-request.model';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { ModalDismissReasons, NgbCalendar, NgbDate, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-credit',
@@ -26,7 +27,7 @@ export class CreditComponent implements OnInit {
   focus2;
   focus3;
   focus4;
-  constructor(private fb: FormBuilder, private cs :CreditService , private crs :CreditRequestService,private modalService: NgbModal, calendar: NgbCalendar) {
+  constructor(private fb: FormBuilder, private cs :CreditService , private crs :CreditRequestService,private modalService: NgbModal, calendar: NgbCalendar,private router: Router) {
     this.fromDate = calendar.getToday();
     this.toDate = calendar.getNext(calendar.getToday(), 'd', 10);
   }
@@ -115,6 +116,7 @@ startDateChanged(date){
       this.cs.addCredit(requestData).subscribe(data=>{
         console.log(data);
       });  
+      this.router.navigate(['/credits']);
     } else {
       // Form validation failed, do something
     }

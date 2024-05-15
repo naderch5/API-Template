@@ -57,7 +57,7 @@ import { CreditRShowComponent } from './credit-r-show/credit-r-show.component';
     CreditREditComponent,
     RecoveryShowComponent,
     RecoveryEditComponent,
-    CreditRShowComponent
+    CreditRShowComponent,
   ],
   imports: [
     BrowserModule,
